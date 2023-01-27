@@ -1,3 +1,3 @@
 # quest-web-cli
 
-Quest AppのWebフロントエンド、React + TypeScript + Viteで書く
+Quest App の Web フロントエンド、React + TypeScript + Vite で書く
