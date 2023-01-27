@@ -1,9 +1,8 @@
-function App() {
+import Header from "./components/Header"
 
+function App() {
   return (
-    <div className="text-center text-sky-600 text-lg">
-      Quest Web
-    </div>
+    <Header />
   )
 }
 
