@@ -8,7 +8,7 @@ type LoginInput = {
   password: string;
 };
 
-const Login = () => {
+const Login: React.FC = () => {
   const { register, handleSubmit } = useForm<LoginInput>();
   const onSubmit: SubmitHandler<LoginInput> = (data) => console.log(data);
 
