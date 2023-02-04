@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import NavButton from "./NavButton";
 
-const Header = () => (
+const Header: React.FC = () => (
   <div className="flex justify-center w-full h-16 shadow">
     <div className="flex justify-between items-center w-2/5">
       <NavLink to="/">

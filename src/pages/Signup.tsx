@@ -17,7 +17,7 @@ const Signup: React.FC = () => {
     <div className="flex justify-center w-full">
       <div className="flex flex-col w-2/5">
         <Spacer size="15px" />
-        <div className="text-lg font-bold">Login</div>
+        <div className="text-lg font-bold">SignUp</div>
         <Spacer size="30px" />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col">
