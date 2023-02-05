@@ -13,3 +13,11 @@ enum Difficulty {
   Normal = "Normal",
   Hard = "Hard",
 }
+
+export type User = {
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  participate_quest: Quest[];
+};
