@@ -18,7 +18,7 @@ const initialState: AuthContextType = {
 
 /* eslint-disable @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars */
 
-const AuthContext = React.createContext<AuthContextType>(initialState);
+export const AuthContext = React.createContext<AuthContextType>(initialState);
 
 type Action = {
   type: "LOGIN" | "LOGOUT";
