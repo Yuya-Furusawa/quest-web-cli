@@ -1,6 +1,9 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+import type { User } from "../libs/type";
+import { AuthContext } from "../context/auth";
 import Spacer from "../components/Spacer";
 
 type LoginInput = {
@@ -9,8 +12,23 @@ type LoginInput = {
 };
 
 const Login: React.FC = () => {
+  const context = React.useContext(AuthContext);
+  const navigate = useNavigate();
+
   const { register, handleSubmit } = useForm<LoginInput>();
-  const onSubmit: SubmitHandler<LoginInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<LoginInput> = async (data) => {
+    const res = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const fetchedUser: User = await res.json();
+
+    context.login(fetchedUser);
+    navigate("/");
+  };
 
   return (
     <div className="flex justify-center w-full">
