@@ -7,7 +7,7 @@ import { AuthContext } from "../context/auth";
 import Spacer from "../components/Spacer";
 
 type LoginInput = {
-  username: string;
+  email: string;
   password: string;
 };
 
@@ -39,11 +39,11 @@ const Login: React.FC = () => {
         <Spacer size="30px" />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col">
-            <label>Username</label>
+            <label>Email</label>
             <Spacer size="5px" />
             <input
               className="border border-gray-300 rounded"
-              {...register("username", { required: true })}
+              {...register("email", { required: true })}
             />
           </div>
           <Spacer size="20px" />
