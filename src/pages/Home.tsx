@@ -23,7 +23,8 @@ const Home: React.FC = () => {
     if (user) {
       context.login(user);
     }
-  }, [user, context]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   if (error)
     return (
