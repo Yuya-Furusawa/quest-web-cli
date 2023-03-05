@@ -1,16 +1,29 @@
 import * as React from "react";
 import useSWR from "swr";
 
-import type { Quest } from "../libs/type";
+import type { Quest, User } from "../libs/type";
 import { fetcher } from "../libs/fetcher";
 import QuestCard from "../components/QuestCard";
 import Spacer from "../components/Spacer";
+import { AuthContext } from "../context/auth";
 
 const Home: React.FC = () => {
   const { data, error, isLoading } = useSWR<Quest[], Error>(
     "http://localhost:3000/quests",
     fetcher
   );
+
+  const context = React.useContext(AuthContext);
+  const { data: user } = useSWR<User, Error>(
+    "http://localhost:3000/user/auth",
+    fetcher
+  );
+
+  React.useEffect(() => {
+    if (user) {
+      context.login(user);
+    }
+  }, [user, context]);
 
   if (error)
     return (
