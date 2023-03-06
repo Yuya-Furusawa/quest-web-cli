@@ -5,6 +5,7 @@ import useSWR from "swr";
 import type { Quest } from "../libs/type";
 import { fetcher } from "../libs/fetcher";
 import Spacer from "../components/Spacer";
+import { AuthContext } from "../context/auth";
 
 const Quest: React.FC = () => {
   const { id } = useParams();
@@ -12,6 +13,13 @@ const Quest: React.FC = () => {
     `http://localhost:3000/quests/${id}`,
     fetcher
   );
+
+  const { user } = React.useContext(AuthContext);
+
+  const isPaticipated = React.useMemo(() => {
+    if (!user) return false;
+    return user.participate_quest.findIndex((quest) => quest.id === id) > -1;
+  }, [user, id]);
 
   if (!quest)
     return (
@@ -36,6 +44,8 @@ const Quest: React.FC = () => {
           <div className="text-base">{`参加人数 : ${quest.num_participate}人`}</div>
           <div className="text-base">{`クリア人数 : ${quest.num_clear}人`}</div>
         </div>
+        <Spacer size="10px" />
+        <div>{isPaticipated ? "参加中" : "未参加"}</div>
       </div>
     </div>
   );
