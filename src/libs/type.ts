@@ -6,6 +6,7 @@ export type Quest = {
   difficulty: Difficulty;
   num_participate: number;
   num_clear: number;
+  challenges: Challenge[];
 };
 
 enum Difficulty {
@@ -20,4 +21,11 @@ export type User = {
   email: string;
   password: string;
   participate_quest: Quest[];
+};
+
+export type Challenge = {
+  id: string;
+  name: string;
+  description: string;
+  quest_id: string;
 };
