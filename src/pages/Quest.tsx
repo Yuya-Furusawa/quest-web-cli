@@ -2,10 +2,11 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 
-import type { Quest } from "../libs/type";
+import type { Quest, Challenge } from "../libs/type";
 import { fetcher } from "../libs/fetcher";
 import Spacer from "../components/Spacer";
 import { AuthContext } from "../context/auth";
+import ChallengeCard from "../components/ChallengeCard";
 
 const Quest: React.FC = () => {
   const { id } = useParams();
@@ -46,6 +47,10 @@ const Quest: React.FC = () => {
         </div>
         <Spacer size="10px" />
         <div>{isPaticipated ? "参加中" : "未参加"}</div>
+        <Spacer size="20px" />
+        {quest.challenges.map((challenge: Challenge) => (
+          <ChallengeCard key={challenge.id} challenge={challenge} />
+        ))}
       </div>
     </div>
   );
