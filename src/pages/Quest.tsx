@@ -7,6 +7,7 @@ import { fetcher } from "../libs/fetcher";
 import Spacer from "../components/Spacer";
 import { AuthContext } from "../context/auth";
 import ChallengeCard from "../components/ChallengeCard";
+import ParticipateButton from "../components/ParticipateButton";
 
 const Quest: React.FC = () => {
   const { id } = useParams();
@@ -17,10 +18,21 @@ const Quest: React.FC = () => {
 
   const { user } = React.useContext(AuthContext);
 
-  const isPaticipated = React.useMemo(() => {
-    if (!user) return false;
-    return user.participate_quest.findIndex((quest) => quest.id === id) > -1;
+  const [status, setStatus] = React.useState<ParticipateStatus>("LogOut");
+  React.useEffect(() => {
+    if (!user) {
+      setStatus("LogOut");
+    } else {
+      const status =
+        user.participate_quest.findIndex((quest) => quest.id === id) > -1
+          ? "Participate"
+          : "NonParticipate";
+      setStatus(status);
+    }
   }, [user, id]);
+  const participateQuest = React.useCallback(() => {
+    setStatus("Participate");
+  }, []);
 
   if (!quest)
     return (
@@ -33,7 +45,15 @@ const Quest: React.FC = () => {
     <div className="flex flex-col justify-center items-center w-full">
       <div className="flex justify-center flex-col w-2/5">
         <Spacer size="25px" />
-        <div className="text-xl font-bold leading-normal">{quest.title}</div>
+        <div className="flex flex-row justify-between items-center">
+          <div className="text-xl font-bold leading-normal">{quest.title}</div>
+          <ParticipateStatusBatch
+            status={status}
+            user_id={user?.id ?? null}
+            quest_id={id ?? null}
+            participateQuest={participateQuest}
+          />
+        </div>
         <Spacer size="10px" />
         <div className="text-sm text-gray-300 leading-tight">
           {quest.description}
@@ -46,7 +66,6 @@ const Quest: React.FC = () => {
           <div className="text-base">{`クリア人数 : ${quest.num_clear}人`}</div>
         </div>
         <Spacer size="10px" />
-        <div>{isPaticipated ? "参加中" : "未参加"}</div>
         <Spacer size="20px" />
         {quest.challenges.map((challenge: Challenge) => (
           <ChallengeCard key={challenge.id} challenge={challenge} />
@@ -55,5 +74,44 @@ const Quest: React.FC = () => {
     </div>
   );
 };
+
+type ParticipateStatus = "LogOut" | "NonParticipate" | "Participate";
+
+type ParticipateStatusBatchProps = {
+  status: ParticipateStatus;
+  user_id: string | null;
+  quest_id: string | null;
+  participateQuest: () => void;
+};
+
+const ParticipateStatusBatch: React.FC<ParticipateStatusBatchProps> = ({
+  status,
+  user_id,
+  quest_id,
+  participateQuest,
+}) => {
+  switch (status) {
+    case "LogOut":
+      return <></>;
+    case "Participate":
+      return (
+        <div className="text-emerald-500 p-1 border rounded border-emerald-500 cursor-default">
+          参加中
+        </div>
+      );
+    case "NonParticipate":
+      if (user_id !== null && quest_id !== null)
+        return (
+          <ParticipateButton
+            user_id={user_id}
+            quest_id={quest_id}
+            participateQuest={participateQuest}
+          />
+        );
+      else return <></>;
+  }
+};
+
+ParticipateStatusBatch.displayName = "ParticipateStatusBatch";
 
 export default Quest;
