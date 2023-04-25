@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 
 import { AuthContext } from "../context/auth";
 import Spacer from "../components/Spacer";
-import { Quest } from "../libs/type";
+import QuestThinCard from "../components/QuestThinCard";
 
 const Profile: React.FC = () => {
   const { user } = React.useContext(AuthContext);
@@ -28,7 +27,7 @@ const Profile: React.FC = () => {
         <div>{user.email}</div>
         <Spacer size="15px" />
         <div className="text-base font-bold">参加中のクエスト</div>
-        <Spacer size="5px" />
+        <Spacer size="10px" />
         <div className="flex flex-col gap-y-2">
           {user.participate_quest.map((quest) => (
             <QuestThinCard key={quest.id} quest={quest} />
@@ -38,23 +37,5 @@ const Profile: React.FC = () => {
     </div>
   );
 };
-
-type QuestThinCardProps = {
-  quest: Quest;
-};
-
-const QuestThinCard: React.FC<QuestThinCardProps> = ({ quest }) => (
-  <Link to={`/quest/${quest.id}`}>
-    <div className="flex flex-col w-full p-4 hover:shadow-lg rounded cursor-pointer border">
-      <div className="text-xl font-bold leading-normal">{quest.title}</div>
-      <Spacer size="10px" />
-      <div className="text-sm text-gray-300 leading-tight">
-        {quest.description}
-      </div>
-      <Spacer size="5px" />
-      <div className="text-base font-bold">{quest.difficulty}</div>
-    </div>
-  </Link>
-);
 
 export default Profile;
