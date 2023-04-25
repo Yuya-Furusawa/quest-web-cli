@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Header from "./components/Header";
 import Quest from "./pages/Quest";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/quest/:id" element={<Quest />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </AuthContextProvider>
   );

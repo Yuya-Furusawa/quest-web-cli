@@ -35,7 +35,11 @@ const Buttons: React.FC<Props> = ({ user }) => {
       </div>
     );
 
-  return <div className="text-sky-600">{user.username}</div>;
+  return (
+    <NavLink to="/profile">
+      <div className="text-sky-600">{user.username}</div>
+    </NavLink>
+  );
 };
 
 export default Header;
