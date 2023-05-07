@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import Header from "./components/Header";
 import Quest from "./pages/Quest";
 import Profile from "./pages/Profile";
+import Challenge from "./pages/Challenge";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/quest/:id" element={<Quest />} />
+        <Route path="/challenge/:id" element={<Challenge />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </AuthContextProvider>
