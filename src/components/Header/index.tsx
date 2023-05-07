@@ -1,8 +1,8 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
 
-import type { User } from "../libs/type";
-import { AuthContext } from "../context/auth";
+import type { User } from "../../libs/type";
+import { AuthContext } from "../../context/auth";
 import NavButton from "./NavButton";
 
 const Header: React.FC = () => {

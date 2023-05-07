@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { AuthContext } from "../context/auth";
-import Spacer from "../components/Spacer";
-import QuestThinCard from "../components/QuestThinCard";
+import Spacer from "../components/atoms/Spacer";
+import QuestThinCard from "../components/Profile/QuestThinCard";
 
 const Profile: React.FC = () => {
   const { user } = React.useContext(AuthContext);

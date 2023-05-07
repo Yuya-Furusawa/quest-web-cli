@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import type { User } from "../libs/type";
 import { AuthContext } from "../context/auth";
-import Spacer from "../components/Spacer";
+import Spacer from "../components/atoms/Spacer";
 
 type LoginInput = {
   email: string;

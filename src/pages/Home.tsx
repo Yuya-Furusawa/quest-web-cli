@@ -3,8 +3,8 @@ import useSWR from "swr";
 
 import type { Quest, User } from "../libs/type";
 import { fetcher } from "../libs/fetcher";
-import QuestCard from "../components/QuestCard";
-import Spacer from "../components/Spacer";
+import QuestCard from "../components/Home/QuestCard";
+import Spacer from "../components/atoms/Spacer";
 import { AuthContext } from "../context/auth";
 
 const Home: React.FC = () => {

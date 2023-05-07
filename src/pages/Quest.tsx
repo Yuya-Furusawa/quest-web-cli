@@ -4,10 +4,10 @@ import useSWR from "swr";
 
 import type { Quest, Challenge } from "../libs/type";
 import { fetcher } from "../libs/fetcher";
-import Spacer from "../components/Spacer";
+import Spacer from "../components/atoms/Spacer";
 import { AuthContext } from "../context/auth";
-import ChallengeCard from "../components/ChallengeCard";
-import ParticipateButton from "../components/ParticipateButton";
+import ChallengeCard from "../components/Quest/ChallengeCard";
+import ParticipateButton from "../components/Quest/ParticipateButton";
 
 const Quest: React.FC = () => {
   const { id } = useParams();

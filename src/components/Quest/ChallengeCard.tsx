@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { Challenge } from "../libs/type";
-import Spacer from "./Spacer";
+import { Challenge } from "../../libs/type";
+import Spacer from "../atoms/Spacer";
 
 type Props = {
   challenge: Challenge;

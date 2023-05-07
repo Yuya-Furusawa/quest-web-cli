@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import { Quest } from "../libs/type";
-import Spacer from "./Spacer";
+import { Quest } from "../../libs/type";
+import Spacer from "../atoms/Spacer";
 
 type QuestThinCardProps = {
   quest: Quest;
