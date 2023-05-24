@@ -10,7 +10,7 @@ const Header: React.FC = () => {
 
   return (
     <div className="flex justify-center w-full h-16 shadow">
-      <div className="flex justify-between items-center w-2/5">
+      <div className="flex justify-between items-center w-11/12 lg:w-2/5">
         <NavLink to="/">
           <div className="text-sky-600 font-bold leading-[4rem]">
             Quest Web App

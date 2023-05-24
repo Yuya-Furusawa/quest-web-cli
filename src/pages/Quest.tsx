@@ -43,7 +43,7 @@ const Quest: React.FC = () => {
 
   return (
     <div className="flex flex-col justify-center items-center w-full">
-      <div className="flex justify-center flex-col w-2/5">
+      <div className="flex justify-center flex-col w-11/12 lg:w-2/5">
         <Spacer size="25px" />
         <div className="flex flex-row justify-between items-center">
           <div className="text-xl font-bold leading-normal">{quest.title}</div>

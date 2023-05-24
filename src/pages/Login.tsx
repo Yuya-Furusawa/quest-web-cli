@@ -33,7 +33,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="flex justify-center w-full">
-      <div className="flex flex-col w-2/5">
+      <div className="flex flex-col w-11/12 lg:w-2/5">
         <Spacer size="15px" />
         <div className="text-lg font-bold">Login</div>
         <Spacer size="30px" />

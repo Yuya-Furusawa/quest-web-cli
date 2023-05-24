@@ -43,7 +43,7 @@ const Home: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center w-full">
       <Spacer size="15px" />
-      <div className="flex justify-center flex-col w-2/5 gap-y-4">
+      <div className="flex justify-center flex-col gap-y-4 w-11/12 lg:w-2/5">
         {data &&
           data.map((quest: Quest) => (
             <QuestCard key={quest.id} quest={quest} />
