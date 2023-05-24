@@ -11,7 +11,7 @@ import ChallengeCompleted from "../components/Challenge/ChallengeCompleted";
 import ChallengeProcessing from "../components/Challenge/ChallengeProcessing";
 import ChallengeNotStarted from "../components/Challenge/ChallengeNotStarted";
 
-const Challenge: React.FC = () => {
+const ChallengePage: React.FC = () => {
   const { id } = useParams();
   const { data: challenge } = useSWR<Challenge, Error>(
     `http://localhost:3000/challenges/${id}`,
@@ -77,4 +77,4 @@ const ChallengeStatus: React.FC<ChallengeStatusProps> = ({
   return <ChallengeNotStarted />;
 };
 
-export default Challenge;
+export default ChallengePage;

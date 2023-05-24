@@ -4,7 +4,7 @@ import { AuthContext } from "../context/auth";
 import Spacer from "../components/atoms/Spacer";
 import QuestThinCard from "../components/Profile/QuestThinCard";
 
-const Profile: React.FC = () => {
+const ProfilePage: React.FC = () => {
   const { user } = React.useContext(AuthContext);
 
   if (!user)
@@ -38,4 +38,4 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;

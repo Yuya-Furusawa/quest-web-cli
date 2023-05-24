@@ -7,7 +7,7 @@ import QuestCard from "../components/Home/QuestCard";
 import Spacer from "../components/atoms/Spacer";
 import { AuthContext } from "../context/auth";
 
-const Home: React.FC = () => {
+const HomePage: React.FC = () => {
   const { data, error, isLoading } = useSWR<Quest[], Error>(
     "http://localhost:3000/quests",
     fetcher
@@ -53,4 +53,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default HomePage;

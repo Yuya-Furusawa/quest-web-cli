@@ -6,28 +6,28 @@ import type { User } from "../libs/type";
 import { AuthContext } from "../context/auth";
 import Spacer from "../components/atoms/Spacer";
 
-type LoginInput = {
+type SignupInput = {
+  username: string;
   email: string;
   password: string;
 };
 
-const Login: React.FC = () => {
+const SignupPage: React.FC = () => {
   const context = React.useContext(AuthContext);
   const navigate = useNavigate();
 
-  const { register, handleSubmit } = useForm<LoginInput>();
-  const onSubmit: SubmitHandler<LoginInput> = async (data) => {
-    const res = await fetch("http://localhost:3000/login", {
+  const { register, handleSubmit } = useForm<SignupInput>();
+  const onSubmit: SubmitHandler<SignupInput> = async (data) => {
+    const res = await fetch("http://localhost:3000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify(data),
     });
-    const fetchedUser: User = await res.json();
+    const RegisterUser: User = await res.json();
 
-    context.login(fetchedUser);
+    context.login(RegisterUser);
     navigate("/");
   };
 
@@ -35,9 +35,18 @@ const Login: React.FC = () => {
     <div className="flex justify-center w-full">
       <div className="flex flex-col w-11/12 lg:w-2/5">
         <Spacer size="15px" />
-        <div className="text-lg font-bold">Login</div>
+        <div className="text-lg font-bold">SignUp</div>
         <Spacer size="30px" />
         <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex flex-col">
+            <label>Username</label>
+            <Spacer size="5px" />
+            <input
+              className="border border-gray-300 rounded"
+              {...register("username", { required: true })}
+            />
+          </div>
+          <Spacer size="20px" />
           <div className="flex flex-col">
             <label>Email</label>
             <Spacer size="5px" />
@@ -57,7 +66,7 @@ const Login: React.FC = () => {
           </div>
           <Spacer size="30px" />
           <button type="submit" className="p-2 bg-sky-600 text-white rounded">
-            Login
+            SignUp
           </button>
         </form>
       </div>
@@ -65,4 +74,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default SignupPage;

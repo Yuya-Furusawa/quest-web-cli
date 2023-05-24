@@ -3,25 +3,25 @@ import { Routes, Route } from "react-router-dom";
 
 import { AuthContextProvider } from "./context/auth";
 
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 import Header from "./components/Header";
-import Quest from "./pages/Quest";
-import Profile from "./pages/Profile";
-import Challenge from "./pages/Challenge";
+import QuestPage from "./pages/QuestPage";
+import ProfilePage from "./pages/ProfilePage";
+import ChallengePage from "./pages/ChallengePage";
 
 function App() {
   return (
     <AuthContextProvider>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/quest/:id" element={<Quest />} />
-        <Route path="/challenge/:id" element={<Challenge />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/quest/:id" element={<QuestPage />} />
+        <Route path="/challenge/:id" element={<ChallengePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </AuthContextProvider>
   );

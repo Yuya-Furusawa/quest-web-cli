@@ -9,7 +9,7 @@ import { AuthContext } from "../context/auth";
 import ChallengeCard from "../components/Quest/ChallengeCard";
 import ParticipateButton from "../components/Quest/ParticipateButton";
 
-const Quest: React.FC = () => {
+const QuestPage: React.FC = () => {
   const { id } = useParams();
   const { data: quest } = useSWR<Quest, Error>(
     `http://localhost:3000/quests/${id}`,
@@ -114,4 +114,4 @@ const ParticipateStatusBatch: React.FC<ParticipateStatusBatchProps> = ({
 
 ParticipateStatusBatch.displayName = "ParticipateStatusBatch";
 
-export default Quest;
+export default QuestPage;
