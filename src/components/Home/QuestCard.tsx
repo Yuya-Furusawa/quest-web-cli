@@ -8,7 +8,7 @@ type Props = {
   quest: Quest;
 };
 
-const QuestCard: React.FC<Props> = ({ quest }) => (
+const QuestCard: React.FC<Props> = React.memo(({ quest }) => (
   <Link to={`/quest/${quest.id}`}>
     <div className="flex flex-col w-full p-4 hover:shadow-lg rounded cursor-pointer border">
       <div className="text-xl font-bold leading-normal">{quest.title}</div>
@@ -25,6 +25,8 @@ const QuestCard: React.FC<Props> = ({ quest }) => (
       </div>
     </div>
   </Link>
-);
+));
+
+QuestCard.displayName = "QuestCard";
 
 export default QuestCard;

@@ -4,7 +4,7 @@ type Props = {
   size: string;
 };
 
-const Spacer: React.FC<Props> = ({ size }) => {
+const Spacer: React.FC<Props> = React.memo(({ size }) => {
   const style = {
     width: `${size}`,
     minWidth: `${size}`,
@@ -13,6 +13,8 @@ const Spacer: React.FC<Props> = ({ size }) => {
   };
 
   return <div style={style} />;
-};
+});
+
+Spacer.displayName = "Spacer";
 
 export default Spacer;

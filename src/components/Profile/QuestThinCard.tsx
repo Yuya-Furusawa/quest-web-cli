@@ -8,7 +8,7 @@ type QuestThinCardProps = {
   quest: Quest;
 };
 
-const QuestThinCard: React.FC<QuestThinCardProps> = ({ quest }) => (
+const QuestThinCard: React.FC<QuestThinCardProps> = React.memo(({ quest }) => (
   <Link to={`/quest/${quest.id}`}>
     <div className="flex flex-col w-full p-4 hover:shadow-lg rounded cursor-pointer border">
       <div className="text-lg font-medium leading-normal">{quest.title}</div>
@@ -20,6 +20,8 @@ const QuestThinCard: React.FC<QuestThinCardProps> = ({ quest }) => (
       <div className="text-base font-medium">{quest.difficulty}</div>
     </div>
   </Link>
-);
+));
+
+QuestThinCard.displayName = "QuestThinCard";
 
 export default QuestThinCard;

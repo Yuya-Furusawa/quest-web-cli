@@ -8,7 +8,7 @@ type Props = {
   challenge: Challenge;
 };
 
-const ChallengeCard: React.FC<Props> = ({ challenge }) => (
+const ChallengeCard: React.FC<Props> = React.memo(({ challenge }) => (
   <Link to={`/challenge/${challenge.id}`}>
     <div className="flex flex-col w-full p-4 hover:shadow-lg rounded cursor-pointer border">
       <div className="text-xl font-bold leading-normal">{challenge.name}</div>
@@ -18,6 +18,8 @@ const ChallengeCard: React.FC<Props> = ({ challenge }) => (
       </div>
     </div>
   </Link>
-);
+));
+
+ChallengeCard.displayName = "ChallengeCard";
 
 export default ChallengeCard;

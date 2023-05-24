@@ -26,7 +26,7 @@ type Props = {
   user: User | null;
 };
 
-const Buttons: React.FC<Props> = ({ user }) => {
+const Buttons: React.FC<Props> = React.memo(({ user }) => {
   if (!user)
     return (
       <div className="flex gap-x-3">
@@ -40,6 +40,8 @@ const Buttons: React.FC<Props> = ({ user }) => {
       <div className="text-sky-600">{user.username}</div>
     </NavLink>
   );
-};
+});
+
+Buttons.displayName = "Buttons";
 
 export default Header;

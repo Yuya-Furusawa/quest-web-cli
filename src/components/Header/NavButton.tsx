@@ -7,7 +7,7 @@ type Props = {
   dest: string;
 };
 
-const NavButton: React.FC<Props> = ({ text, primary, dest }) => (
+const NavButton: React.FC<Props> = React.memo(({ text, primary, dest }) => (
   <NavLink to={dest}>
     <div
       className={`flex items-center justify-center rounded cursor-pointer hover:opacity-75 px-3 py-2 text-sm min-w-[80px] ${
@@ -17,6 +17,8 @@ const NavButton: React.FC<Props> = ({ text, primary, dest }) => (
       {text}
     </div>
   </NavLink>
-);
+));
+
+NavButton.displayName = "NavButton";
 
 export default NavButton;
