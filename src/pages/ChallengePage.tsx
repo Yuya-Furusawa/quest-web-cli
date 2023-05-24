@@ -7,9 +7,7 @@ import { fetcher } from "../libs/fetcher";
 import useStayDetection from "../libs/useStayDetection";
 import Spacer from "../components/atoms/Spacer";
 import { AuthContext } from "../context/auth";
-import ChallengeCompleted from "../components/Challenge/ChallengeCompleted";
-import ChallengeProcessing from "../components/Challenge/ChallengeProcessing";
-import ChallengeNotStarted from "../components/Challenge/ChallengeNotStarted";
+import ChallengeStatus from "../components/Challenge/ChallengeStatus";
 
 const ChallengePage: React.FC = () => {
   const { id } = useParams();
@@ -51,30 +49,16 @@ const ChallengePage: React.FC = () => {
           {challenge.description}
         </div>
         <Spacer size="30px" />
-        <ChallengeStatus
-          isCompleted={isCompleted}
-          isStaying={isStaying}
-          remainingTime={remainingTime}
-        />
+        {user && (
+          <ChallengeStatus
+            isCompleted={isCompleted}
+            isStaying={isStaying}
+            remainingTime={remainingTime}
+          />
+        )}
       </div>
     </div>
   );
-};
-
-type ChallengeStatusProps = {
-  isCompleted: boolean;
-  isStaying: boolean;
-  remainingTime: number;
-};
-
-const ChallengeStatus: React.FC<ChallengeStatusProps> = ({
-  isCompleted,
-  isStaying,
-  remainingTime,
-}) => {
-  if (isCompleted) return <ChallengeCompleted />;
-  if (isStaying) return <ChallengeProcessing remainingTime={remainingTime} />;
-  return <ChallengeNotStarted />;
 };
 
 export default ChallengePage;

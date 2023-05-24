@@ -5,7 +5,7 @@ type Props = {
   remainingTime: number;
 };
 
-const ChallengeProcessing: React.FC<Props> = ({ remainingTime }) => {
+const ChallengeProcessing: React.FC<Props> = React.memo(({ remainingTime }) => {
   const timeFormatted = Math.floor(remainingTime / 1000);
   const seconds = String(timeFormatted % 60).padStart(2, "0");
   const minutes = String(Math.floor(timeFormatted % 60)).padStart(2, "0");
@@ -17,6 +17,8 @@ const ChallengeProcessing: React.FC<Props> = ({ remainingTime }) => {
       <div className="text-base">{`残り ${minutes}:${seconds}`}</div>
     </div>
   );
-};
+});
+
+ChallengeProcessing.displayName = "ChallengeProcessing";
 
 export default ChallengeProcessing;
