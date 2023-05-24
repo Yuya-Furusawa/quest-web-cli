@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint --ext .tsx,.ts src/",
     "lintfix": "npm run lint -- --fix",
-    "prettier": "npx prettier --write src"
+    "format": "npx prettier --write src"
   },
   "dependencies": {
     "react": "^18.2.0",
