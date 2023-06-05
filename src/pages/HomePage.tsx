@@ -9,13 +9,13 @@ import { AuthContext } from "../context/auth";
 
 const HomePage: React.FC = () => {
   const { data, error, isLoading } = useSWR<Quest[], Error>(
-    "http://localhost:3000/quests",
+    `${import.meta.env.VITE_API_BASE_URL}/quests`,
     fetcher
   );
 
   const context = React.useContext(AuthContext);
   const { data: user } = useSWR<User, Error>(
-    "http://localhost:3000/user/auth",
+    `${import.meta.env.VITE_API_BASE_URL}/user/auth`,
     fetcher
   );
 

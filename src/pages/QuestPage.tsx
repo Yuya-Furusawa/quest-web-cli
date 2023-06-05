@@ -12,7 +12,7 @@ import ParticipateButton from "../components/Quest/ParticipateButton";
 const QuestPage: React.FC = () => {
   const { id } = useParams();
   const { data: quest } = useSWR<Quest, Error>(
-    `http://localhost:3000/quests/${id}`,
+    `${import.meta.env.VITE_API_BASE_URL}/quests/${id}`,
     fetcher
   );
 

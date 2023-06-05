@@ -12,7 +12,7 @@ import ChallengeStatus from "../components/Challenge/ChallengeStatus";
 const ChallengePage: React.FC = () => {
   const { id } = useParams();
   const { data: challenge } = useSWR<Challenge, Error>(
-    `http://localhost:3000/challenges/${id}`,
+    `${import.meta.env.VITE_API_BASE_URL}/challenges/${id}`,
     fetcher
   );
 

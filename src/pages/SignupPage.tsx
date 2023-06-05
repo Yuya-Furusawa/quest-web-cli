@@ -18,7 +18,7 @@ const SignupPage: React.FC = () => {
 
   const { register, handleSubmit } = useForm<SignupInput>();
   const onSubmit: SubmitHandler<SignupInput> = async (data) => {
-    const res = await fetch("http://localhost:3000/register", {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

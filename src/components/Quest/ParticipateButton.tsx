@@ -14,7 +14,7 @@ const ParticipateButton: React.FC<Props> = React.memo(
     };
 
     const onClick = async () => {
-      await fetch("http://localhost:3000/participate", {
+      await fetch(`${import.meta.env.VITE_API_BASE_URL}/participate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
