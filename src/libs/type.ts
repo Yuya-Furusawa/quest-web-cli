@@ -28,4 +28,6 @@ export type Challenge = {
   name: string;
   description: string;
   quest_id: string;
+  latitude: number;
+  longitude: number;
 };

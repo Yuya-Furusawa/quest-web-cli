@@ -18,11 +18,14 @@ const ChallengePage: React.FC = () => {
 
   const { user } = React.useContext(AuthContext);
 
-  // 対象地点の座標（デモ）
-  const targetPosition = {
-    latitude: 35.6895, // 緯度
-    longitude: 139.6917, // 経度
-  };
+  // 対象地点の座標
+  const targetPosition = React.useMemo(
+    () => ({
+      latitude: challenge?.latitude ?? 0, // 緯度
+      longitude: challenge?.longitude ?? 0, // 経度
+    }),
+    [challenge]
+  );
 
   const { isStaying, remainingTime } = useStayDetection(
     targetPosition,
