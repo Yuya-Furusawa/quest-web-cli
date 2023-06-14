@@ -9,7 +9,7 @@ export type Quest = {
   challenges: Challenge[];
 };
 
-enum Difficulty {
+export enum Difficulty {
   Easy = "Easy",
   Normal = "Normal",
   Hard = "Hard",
