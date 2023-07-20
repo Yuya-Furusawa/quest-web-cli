@@ -2,9 +2,9 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import type { User } from "../libs/type";
-import { AuthContext } from "../context/auth";
-import Spacer from "../components/atoms/Spacer";
+import type { User } from "@libs/type";
+import { AuthContext } from "@context/auth";
+import Spacer from "@components/atoms/Spacer";
 
 type LoginInput = {
   email: string;

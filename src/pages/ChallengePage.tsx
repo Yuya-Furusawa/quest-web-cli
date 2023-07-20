@@ -2,12 +2,12 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 
-import type { Challenge } from "../libs/type";
-import { fetcher } from "../libs/fetcher";
-import useStayDetection from "../libs/useStayDetection";
-import Spacer from "../components/atoms/Spacer";
-import { AuthContext } from "../context/auth";
-import ChallengeStatus from "../components/Challenge/ChallengeStatus";
+import type { Challenge } from "@libs/type";
+import { fetcher } from "@libs/fetcher";
+import useStayDetection from "@libs/useStayDetection";
+import Spacer from "@components/atoms/Spacer";
+import { AuthContext } from "@context/auth";
+import ChallengeStatus from "@components/Challenge/ChallengeStatus";
 import TokyoTowerColored from "@assets/tokyo-tower_color.png";
 import TokyoTowerMonoclo from "@assets/tokyo-tower_monoclo.png";
 

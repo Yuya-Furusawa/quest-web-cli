@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import type { Quest } from "../../libs/type";
-import Spacer from "../atoms/Spacer";
+import type { Quest } from "@libs/type";
+import Spacer from "@components/atoms/Spacer";
 
 type Props = {
   quest: Quest;

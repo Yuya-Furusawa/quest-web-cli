@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import Spacer from "../../atoms/Spacer";
-import NavButton from "../../Header/NavButton";
+import Spacer from "@components/atoms/Spacer";
+import NavButton from "@components/Header/NavButton";
 
 const NotLoggedInMessage: React.FC = () => (
   <div className="flex flex-col items-center">

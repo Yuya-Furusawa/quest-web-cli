@@ -2,12 +2,12 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 
-import type { Quest, Challenge } from "../libs/type";
-import { fetcher } from "../libs/fetcher";
-import Spacer from "../components/atoms/Spacer";
-import { AuthContext } from "../context/auth";
-import ChallengeCard from "../components/Quest/ChallengeCard";
-import ParticipateButton from "../components/Quest/ParticipateButton";
+import type { Quest, Challenge } from "@libs/type";
+import { fetcher } from "@libs/fetcher";
+import { AuthContext } from "@context/auth";
+import Spacer from "@components/atoms/Spacer";
+import ChallengeCard from "@components/Quest/ChallengeCard";
+import ParticipateButton from "@components/Quest/ParticipateButton";
 
 const QuestPage: React.FC = () => {
   const { id } = useParams();

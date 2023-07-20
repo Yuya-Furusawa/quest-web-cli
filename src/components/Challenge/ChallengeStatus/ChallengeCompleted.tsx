@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ReactComponent as CheckIcon } from "@assets/checkIcon.svg";
-import Spacer from "../../atoms/Spacer";
+import Spacer from "@components/atoms/Spacer";
 
 const ChallengeCompleted: React.FC = () => (
   <div className="flex flex-colmun justify-center">

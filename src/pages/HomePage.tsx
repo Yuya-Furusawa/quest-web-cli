@@ -1,11 +1,11 @@
 import * as React from "react";
 import useSWR from "swr";
 
-import type { Quest, User } from "../libs/type";
-import { fetcher } from "../libs/fetcher";
-import QuestCard from "../components/Home/QuestCard";
-import Spacer from "../components/atoms/Spacer";
-import { AuthContext } from "../context/auth";
+import type { Quest, User } from "@libs/type";
+import { fetcher } from "@libs/fetcher";
+import QuestCard from "@components/Home/QuestCard";
+import Spacer from "@components/atoms/Spacer";
+import { AuthContext } from "@context/auth";
 
 const HomePage: React.FC = () => {
   const { data, error, isLoading } = useSWR<Quest[], Error>(

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import type { User } from "../libs/type";
+import type { User } from "@libs/type";
 
 type AuthContextType = {
   user: User | null;

@@ -1,8 +1,8 @@
 import * as React from "react";
-
-import { Challenge } from "../../libs/type";
-import Spacer from "../atoms/Spacer";
 import { Link } from "react-router-dom";
+
+import { Challenge } from "@libs/type";
+import Spacer from "@components/atoms/Spacer";
 
 type Props = {
   challenge: Challenge;
