@@ -2,19 +2,48 @@ import * as React from "react";
 
 import ChallengeCompleted from "./ChallengeCompleted";
 import ChallengeProcessing from "./ChallengeProcessing";
-import ChallengeNotStarted from "./ChallengeNotStarted";
+import NotInValidAreaMessage from "./NotInValidAreaMessage";
+import NotLoggedInMessage from "./NotLoggedInMessage";
+import CheckInMessage from "./CheckInMessage";
 
 type Props = {
+  isLoggedIn: boolean;
+  isInValidArea: boolean;
+  isCheckedIn: boolean;
   isCompleted: boolean;
-  isStaying: boolean;
+  onClickCheckInButton: () => void;
   remainingTime: number;
 };
 
 const ChallengeStatus: React.FC<Props> = React.memo(
-  ({ isCompleted, isStaying, remainingTime }) => {
+  ({
+    isLoggedIn,
+    isInValidArea,
+    isCheckedIn,
+    isCompleted,
+    onClickCheckInButton,
+    remainingTime,
+  }) => {
+    // ログインしていない状態
+    // ログインを促すメッセージを表示
+    if (!isLoggedIn) return <NotLoggedInMessage />;
+
+    // チャレンジが完了している状態
+    // チャレンジ完了メッセージを表示
     if (isCompleted) return <ChallengeCompleted />;
-    if (isStaying) return <ChallengeProcessing remainingTime={remainingTime} />;
-    return <ChallengeNotStarted />;
+
+    // チェックポイント外にいる状態
+    // チェックポイント内への移動を促すメッセージを表示
+    if (!isInValidArea) return <NotInValidAreaMessage />;
+
+    // チェックポイント内にいてチェックインしていない状態
+    // チェックインボタンを表示
+    if (!isCheckedIn)
+      return <CheckInMessage onClickCheckInButton={onClickCheckInButton} />;
+
+    // チェックインしている状態
+    // 残り時間を表示
+    return <ChallengeProcessing remainingTime={remainingTime} />;
   }
 );
 

@@ -73,15 +73,14 @@ const ChallengePage: React.FC = () => {
           </div>
         </div>
         <Spacer size="50px" />
-        {user ? (
-          <ChallengeStatus
-            isCompleted={isCompleted}
-            isStaying={isStaying}
-            remainingTime={remainingTime}
-          />
-        ) : (
-          <div>Please Login</div>
-        )}
+        <ChallengeStatus
+          isLoggedIn={true}
+          isInValidArea={true}
+          isCheckedIn={false}
+          isCompleted={isCompleted}
+          onClickCheckInButton={() => {}}
+          remainingTime={remainingTime}
+        />
       </div>
     </div>
   );
