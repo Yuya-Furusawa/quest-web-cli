@@ -1,7 +1,7 @@
 import * as React from "react";
 
 type StayDetectionResult = {
-  isStaying: boolean;
+  isInValidArea: boolean;
   remainingTime: number;
 };
 
@@ -12,11 +12,11 @@ type Coordinates = {
 
 const useStayDetection = (
   targetPosition: Coordinates,
-  isParticipated: boolean,
+  shouldCalculate: boolean,
   timeThreshold = 300000, // 5分間滞在したら「滞在した」と判定する
   accuracyThreshold = 50 // 50メートル以内の範囲にいたら「滞在した」と判定する、対象地点が大きい場合はここを大きくする場合がありそう
 ): StayDetectionResult => {
-  const [isStaying, setIsStaying] = React.useState(false);
+  const [isInValidArea, setIsInValidArea] = React.useState(false);
   const [watchId, setWatchId] = React.useState<number | null>(null);
   const [initialTimeStamp, setInitialTimeStamp] = React.useState<number | null>(
     null
@@ -25,7 +25,14 @@ const useStayDetection = (
 
   React.useEffect(() => {
     // クエストに参加していない状態では位置情報の取得・計算を行わない
-    if (!isParticipated) {
+    if (!shouldCalculate) {
+      if (watchId !== null) {
+        navigator.geolocation.clearWatch(watchId);
+        setWatchId(null);
+        setIsInValidArea(false);
+        setInitialTimeStamp(null);
+        setRemainingTime(timeThreshold);
+      }
       return;
     }
 
@@ -38,14 +45,22 @@ const useStayDetection = (
         const distance = calculateDistance(targetPosition, coords);
         const elapsedTime = timestamp - initialTimeStamp;
 
-        if (distance <= accuracyThreshold && elapsedTime >= timeThreshold) {
-          setIsStaying(true);
-          if (watchId) {
-            navigator.geolocation.clearWatch(watchId);
+        // 範囲内にいるときの処理
+        if (distance <= accuracyThreshold) {
+          setIsInValidArea(true);
+          if (elapsedTime >= timeThreshold) {
+            if (watchId) {
+              navigator.geolocation.clearWatch(watchId);
+              setWatchId(null);
+            }
+          } else {
+            setRemainingTime(timeThreshold - elapsedTime);
           }
+          // 範囲外にいるときの処理
         } else {
-          setIsStaying(false);
-          setRemainingTime(timeThreshold - elapsedTime);
+          setIsInValidArea(false);
+          setInitialTimeStamp(null);
+          setRemainingTime(timeThreshold);
         }
       }
     };
@@ -74,16 +89,10 @@ const useStayDetection = (
         navigator.geolocation.clearWatch(watchId);
       }
     };
-  }, [
-    targetPosition,
-    timeThreshold,
-    accuracyThreshold,
-    initialTimeStamp,
-    watchId,
-  ]);
+  }, [targetPosition, shouldCalculate, timeThreshold, accuracyThreshold]);
 
   return {
-    isStaying,
+    isInValidArea,
     remainingTime,
   };
 };

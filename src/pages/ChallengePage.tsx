@@ -29,13 +29,18 @@ const ChallengePage: React.FC = () => {
     [challenge]
   );
 
-  const { isStaying, remainingTime } = useStayDetection(
-    targetPosition,
-    user ? true : false
-  );
+  const [isCheckedIn, setIsCheckedIn] = React.useState(false);
+  const onClickCheckInButton = React.useCallback(() => {
+    setIsCheckedIn(true);
+  }, []);
 
   // TODO: そのチャレンジを達成しているか否かを判定する
   const isCompleted = false;
+
+  const { isInValidArea, remainingTime } = useStayDetection(
+    targetPosition,
+    user !== null && !isCompleted // ログインしていてかつ、チャレンジ未達成の場合のみ位置情報の計算を行う
+  );
 
   if (!challenge)
     return (
@@ -74,11 +79,11 @@ const ChallengePage: React.FC = () => {
         </div>
         <Spacer size="50px" />
         <ChallengeStatus
-          isLoggedIn={true}
-          isInValidArea={true}
-          isCheckedIn={false}
+          isLoggedIn={user ? true : false}
+          isInValidArea={isInValidArea}
+          isCheckedIn={isCheckedIn}
           isCompleted={isCompleted}
-          onClickCheckInButton={() => {}}
+          onClickCheckInButton={onClickCheckInButton}
           remainingTime={remainingTime}
         />
       </div>
