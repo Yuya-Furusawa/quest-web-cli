@@ -35,7 +35,10 @@ const ChallengePage: React.FC = () => {
   }, []);
 
   // TODO: そのチャレンジを達成しているか否かを判定する
-  const isCompleted = false;
+  const [isCompleted, setIsCompleted] = React.useState(false);
+  const onComplete = React.useCallback(() => {
+    setIsCompleted(true);
+  }, []);
 
   const { isInValidArea, remainingTime } = useStayDetection(
     targetPosition,
@@ -83,6 +86,7 @@ const ChallengePage: React.FC = () => {
           isInValidArea={isInValidArea}
           isCheckedIn={isCheckedIn}
           isCompleted={isCompleted}
+          onComplete={onComplete}
           onClickCheckInButton={onClickCheckInButton}
           remainingTime={remainingTime}
         />
