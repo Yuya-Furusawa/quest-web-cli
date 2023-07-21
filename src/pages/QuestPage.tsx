@@ -67,9 +67,11 @@ const QuestPage: React.FC = () => {
         </div>
         <Spacer size="10px" />
         <Spacer size="20px" />
-        {quest.challenges.map((challenge: Challenge) => (
-          <ChallengeCard key={challenge.id} challenge={challenge} />
-        ))}
+        <div className="flex flex-col gap-y-4">
+          {quest.challenges.map((challenge: Challenge) => (
+            <ChallengeCard key={challenge.id} challenge={challenge} />
+          ))}
+        </div>
       </div>
     </div>
   );
