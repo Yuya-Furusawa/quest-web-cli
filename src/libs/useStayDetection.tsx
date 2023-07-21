@@ -13,24 +13,23 @@ type Coordinates = {
 const useStayDetection = (
   targetPosition: Coordinates,
   shouldCalculate: boolean,
-  timeThreshold = 300000, // 5分間滞在したら「滞在した」と判定する
+  timeThreshold = 30000, // 30秒間滞在したら「滞在した」と判定する
   accuracyThreshold = 50 // 50メートル以内の範囲にいたら「滞在した」と判定する、対象地点が大きい場合はここを大きくする場合がありそう
 ): StayDetectionResult => {
   const [isInValidArea, setIsInValidArea] = React.useState(false);
-  const [watchId, setWatchId] = React.useState<number | null>(null);
-  const [initialTimeStamp, setInitialTimeStamp] = React.useState<number | null>(
-    null
-  );
+  const watchIdRef = React.useRef<number | null>(null);
+  const initialTimeStampRef = React.useRef<number | null>(null);
   const [remainingTime, setRemainingTime] = React.useState(timeThreshold);
 
+  // 位置情報の取得と計算を行う
   React.useEffect(() => {
-    // クエストに参加していない状態では位置情報の取得・計算を行わない
+    // 必要ない場合は位置情報の取得・計算を行わない
     if (!shouldCalculate) {
-      if (watchId !== null) {
-        navigator.geolocation.clearWatch(watchId);
-        setWatchId(null);
+      if (watchIdRef.current !== null) {
+        navigator.geolocation.clearWatch(watchIdRef.current);
+        watchIdRef.current = null;
         setIsInValidArea(false);
-        setInitialTimeStamp(null);
+        initialTimeStampRef.current = null;
         setRemainingTime(timeThreshold);
       }
       return;
@@ -39,19 +38,19 @@ const useStayDetection = (
     // 端末の位置が変わった場合に呼び出される関数
     const onPositionChanged = (position: GeolocationPosition) => {
       const { coords, timestamp } = position;
-      if (!initialTimeStamp) {
-        setInitialTimeStamp(timestamp);
+      if (initialTimeStampRef.current === null) {
+        initialTimeStampRef.current = timestamp;
       } else {
         const distance = calculateDistance(targetPosition, coords);
-        const elapsedTime = timestamp - initialTimeStamp;
+        const elapsedTime = timestamp - initialTimeStampRef.current;
 
         // 範囲内にいるときの処理
         if (distance <= accuracyThreshold) {
           setIsInValidArea(true);
           if (elapsedTime >= timeThreshold) {
-            if (watchId) {
-              navigator.geolocation.clearWatch(watchId);
-              setWatchId(null);
+            if (watchIdRef.current) {
+              navigator.geolocation.clearWatch(watchIdRef.current);
+              watchIdRef.current = null;
             }
           } else {
             setRemainingTime(timeThreshold - elapsedTime);
@@ -59,7 +58,7 @@ const useStayDetection = (
           // 範囲外にいるときの処理
         } else {
           setIsInValidArea(false);
-          setInitialTimeStamp(null);
+          initialTimeStampRef.current = null;
           setRemainingTime(timeThreshold);
         }
       }
@@ -81,15 +80,37 @@ const useStayDetection = (
       onError,
       options
     );
-    setWatchId(id);
+    watchIdRef.current = id;
 
     // クリーンアップ関数
     return () => {
-      if (watchId) {
-        navigator.geolocation.clearWatch(watchId);
+      if (watchIdRef.current) {
+        navigator.geolocation.clearWatch(watchIdRef.current);
       }
     };
   }, [targetPosition, shouldCalculate, timeThreshold, accuracyThreshold]);
+
+  // 残り時間のカウントダウンを行う
+  React.useEffect(() => {
+    // Node.jsのタイマーモジュールを用いる
+    let intervalId: NodeJS.Timeout | null = null;
+
+    // 有効範囲内にいるときにカウントダウンを行う
+    if (isInValidArea) {
+      intervalId = setInterval(() => {
+        setRemainingTime((prevTime) => {
+          const newTime = prevTime - 1000; // 1秒ずつ減らす
+          return newTime;
+        });
+      }, 1000); // 1秒ごとに実行
+    }
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [isInValidArea]);
 
   return {
     isInValidArea,
