@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import * as React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
@@ -12,5 +13,7 @@ export default meta;
 type Story = StoryObj<typeof ChallengeProcessing>;
 
 export const Default: Story = {
-  render: () => <ChallengeProcessing remainingTime={180000} />,
+  render: () => (
+    <ChallengeProcessing onComplete={() => {}} remainingTime={180000} />
+  ),
 };
