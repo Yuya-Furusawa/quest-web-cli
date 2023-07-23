@@ -24,7 +24,8 @@ const ChallengeCard: React.FC<Props> = React.memo(({ challenge }) => {
           alt="東京タワーのカラーアイコン"
           className={'aspect-square object-cover ' + (isCompleted ? '' : 'grayscale')}
         />
-        <div className="text-base text-center py-2 font-bold leading-normal">{challenge.name}</div>
+        <Spacer size="8px" />
+        <div className="text-base text-center font-bold leading-normal line-clamp-1">{challenge.name}</div>
       </div>
     </Link>
   );
