@@ -19,19 +19,11 @@ const ChallengeCard: React.FC<Props> = React.memo(({ challenge }) => {
     <Link to={`/challenge/${challenge.id}`}>
       <div className="flex flex-col w-full hover:opacity-60 cursor-pointer">
         {/* TODO: 一旦静的画像で代替 */}
-        {isCompleted ? (
-          <img
-            src={TokyoTowerColored}
-            alt="東京タワーのカラーアイコン"
-            className="aspect-square object-cover"
-          />
-        ) : (
-          <img
-            src={TokyoTowerMonoclo}
-            alt="東京タワーのモノクロアイコン"
-            className="aspect-square object-cover"
-          />
-        )}
+        <img
+          src={TokyoTowerColored}
+          alt="東京タワーのカラーアイコン"
+          className={'aspect-square object-cover ' + (isCompleted ? '' : 'grayscale')}
+        />
         <div className="text-base text-center py-2 font-bold leading-normal">{challenge.name}</div>
       </div>
     </Link>
