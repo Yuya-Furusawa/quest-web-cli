@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import { Challenge } from "@libs/type";
 import TokyoTowerColored from "@assets/tokyo-tower_color.png";
-import TokyoTowerMonoclo from "@assets/tokyo-tower_monoclo.png";
 import Spacer from "@components/atoms/Spacer";
 
 type Props = {
