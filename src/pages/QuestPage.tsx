@@ -58,16 +58,8 @@ const QuestPage: React.FC = () => {
         <div className="text-sm text-gray-300 leading-tight">
           {quest.description}
         </div>
-        <Spacer size="5px" />
-        <div className="text-base font-bold">{quest.difficulty}</div>
-        <Spacer size="5px" />
-        <div className="flex gap-x-4">
-          <div className="text-base">{`参加人数 : ${quest.num_participate}人`}</div>
-          <div className="text-base">{`クリア人数 : ${quest.num_clear}人`}</div>
-        </div>
-        <Spacer size="10px" />
         <Spacer size="20px" />
-        <div className="flex flex-col gap-y-4">
+        <div className="grid grid-cols-3 gap-4">
           {quest.challenges.map((challenge: Challenge) => (
             <ChallengeCard key={challenge.id} challenge={challenge} />
           ))}
