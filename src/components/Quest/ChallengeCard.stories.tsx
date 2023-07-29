@@ -21,16 +21,19 @@ export default meta;
 
 type Story = StoryObj<typeof ChallengeCard>;
 
-export const Default: Story = {
-  render: () => {
-    const challenge: Challenge = {
-      id: "ApfViz6RSzURfznJg-EWN",
-      name: "スターバックス渋谷センター街店に行く",
-      description: "スターバックス渋谷センター街店で買い物をして滞在する",
-      quest_id: "LLi9PEyXneHRrm6Elny1I",
-      latitude: 35.6895,
-      longitude: 139.6917,
-    };
-    return <ChallengeCard challenge={challenge} />;
-  },
+const challenge: Challenge = {
+  id: "ApfViz6RSzURfznJg-EWN",
+  name: "スターバックス渋谷センター街店に行く",
+  description: "スターバックス渋谷センター街店で買い物をして滞在する",
+  quest_id: "LLi9PEyXneHRrm6Elny1I",
+  latitude: 35.6895,
+  longitude: 139.6917,
+};
+
+export const Completed: Story = {
+  render: () => <ChallengeCard challenge={challenge} isCompleted={true} />,
+};
+
+export const NotCompleted: Story = {
+  render: () => <ChallengeCard challenge={challenge} isCompleted={false} />,
 };
