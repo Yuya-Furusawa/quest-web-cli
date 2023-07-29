@@ -7,18 +7,22 @@ import Spacer from "@components/atoms/Spacer";
 
 type Props = {
   challenge: Challenge;
+  isCompleted: boolean;
 };
 
-const ChallengeCard: React.FC<Props> = React.memo(({ challenge }) => (
+const ChallengeCard: React.FC<Props> = React.memo(({ challenge, isCompleted }) => (
   <Link to={`/challenge/${challenge.id}`}>
     <div className="flex flex-col w-full hover:opacity-60 cursor-pointer">
       {/* TODO: 一旦静的画像で代替 */}
       <img
         src={TokyoTowerColored}
-        alt="東京タワーのカラーアイコン"
+        alt={
+          "東京タワーのチャレンジアイコン" +
+          (isCompleted ? "（完了）" : "（未完了）")
+        }
         className={
           "aspect-square object-cover " +
-          (challenge.id[0].toUpperCase() <= "M" ? "" : "grayscale") // TODO: サーバーから返される完了ステータスに置き換える
+          (isCompleted ? "" : "grayscale")
         }
       />
       <Spacer size="8px" />

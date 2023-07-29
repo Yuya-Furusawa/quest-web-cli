@@ -61,7 +61,11 @@ const QuestPage: React.FC = () => {
         <Spacer size="20px" />
         <div className="grid grid-cols-3 gap-4">
           {quest.challenges.map((challenge: Challenge) => (
-            <ChallengeCard key={challenge.id} challenge={challenge} />
+            <ChallengeCard
+              key={challenge.id}
+              challenge={challenge}
+              isCompleted={challenge.id[0].toUpperCase() <= "M"} // TODO: サーバーから返される完了ステータスに置き換える
+            />
           ))}
         </div>
       </div>
