@@ -30,4 +30,8 @@ export type Challenge = {
   quest_id: string;
   latitude: number;
   longitude: number;
+  stamp_name: string;
+  stamp_color_image_url: string;
+  stamp_gray_image_url: string;
+  flavor_text: string;
 };
