@@ -2,7 +2,6 @@ import * as React from "react";
 
 import { AuthContext } from "@context/auth";
 import Spacer from "@components/atoms/Spacer";
-import QuestThinCard from "@components/Profile/QuestThinCard";
 
 const ProfilePage: React.FC = () => {
   const { user } = React.useContext(AuthContext);
@@ -25,14 +24,6 @@ const ProfilePage: React.FC = () => {
         <div className="text-base font-bold">メールアドレス</div>
         <Spacer size="5px" />
         <div>{user.email}</div>
-        <Spacer size="15px" />
-        <div className="text-base font-bold">参加中のクエスト</div>
-        <Spacer size="10px" />
-        <div className="flex flex-col gap-y-2">
-          {user.participate_quest.map((quest) => (
-            <QuestThinCard key={quest.id} quest={quest} />
-          ))}
-        </div>
       </div>
     </div>
   );

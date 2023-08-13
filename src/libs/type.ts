@@ -10,7 +10,6 @@ export type User = {
   username: string;
   email: string;
   password: string;
-  participate_quest: Quest[];
 };
 
 export type Challenge = {
