@@ -77,8 +77,8 @@ const ChallengePage: React.FC = () => {
             )}
           </div>
         </div>
-        <Spacer size="50px" />
-        <p className="text-center italic text-base">{challenge.flavor_text}</p>
+        <Spacer size="40px" />
+        <p className="text-center italic text-sm text-gray-400">{challenge.flavor_text}</p>
         <Spacer size="50px" />
         <ChallengeStatus
           isLoggedIn={user ? true : false}
