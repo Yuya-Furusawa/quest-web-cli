@@ -23,7 +23,6 @@ export const Default: Story = {
       id: "",
       username: "Test User",
       email: "test@example.com",
-      password: "password",
     };
     return (
       <AuthContext.Provider value={{ user, login: () => {}, logout: () => {} }}>
