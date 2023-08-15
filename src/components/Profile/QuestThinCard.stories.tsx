@@ -3,7 +3,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import { withRouter } from "storybook-addon-react-router-v6";
 
 import type { Quest } from "../../libs/type";
-import { Difficulty } from "../../libs/type";
 import QuestThinCard from "./QuestThinCard";
 
 const meta: Meta<typeof QuestThinCard> = {
@@ -29,10 +28,6 @@ export const Default: Story = {
       title: "全国のスターバックスをめぐるスタンプラリー",
       description:
         "日本各地のスターバックスをめぐるスタンプラリーです。47都道府県のスターバックスに行くことができたらスタンプラリークリアです！",
-      price: 0,
-      difficulty: Difficulty.Normal,
-      num_participate: 5846,
-      num_clear: 78,
       challenges: [
         {
           id: "ApfViz6RSzURfznJg-EWN",
@@ -41,6 +36,10 @@ export const Default: Story = {
           quest_id: "LLi9PEyXneHRrm6Elny1I",
           latitude: 35.6895,
           longitude: 139.6917,
+          stamp_name: "test",
+          stamp_color_image_url: "test-url-color",
+          stamp_gray_image_url: "test-url-monoclo",
+          flavor_text: "test-text",
         },
         {
           id: "wRo4pjKzOcRD6xJH8-25t",
@@ -49,6 +48,10 @@ export const Default: Story = {
           quest_id: "LLi9PEyXneHRrm6Elny1I",
           latitude: 35.6895,
           longitude: 139.6917,
+          stamp_name: "test",
+          stamp_color_image_url: "test-url-color",
+          stamp_gray_image_url: "test-url-monoclo",
+          flavor_text: "test-text",
         },
       ],
     };

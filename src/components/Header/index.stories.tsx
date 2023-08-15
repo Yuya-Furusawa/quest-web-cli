@@ -34,7 +34,6 @@ export const Login: Story = {
       username: "Test User",
       email: "test@example.com",
       password: "password",
-      participate_quest: [],
     };
 
     return (
