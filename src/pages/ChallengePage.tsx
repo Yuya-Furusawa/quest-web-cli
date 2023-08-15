@@ -8,8 +8,6 @@ import useStayDetection from "@libs/useStayDetection";
 import Spacer from "@components/atoms/Spacer";
 import { AuthContext } from "@context/auth";
 import ChallengeStatus from "@components/Challenge/ChallengeStatus";
-import TokyoTowerColored from "@assets/tokyo-tower_color.png";
-import TokyoTowerMonoclo from "@assets/tokyo-tower_monoclo.png";
 
 const ChallengePage: React.FC = () => {
   const { id } = useParams();
@@ -64,22 +62,25 @@ const ChallengePage: React.FC = () => {
         <Spacer size="50px" />
         <div className="flex justify-center w-full">
           <div className="bg-sky-200 w-52 h-52 p-6 rounded-lg">
-            {/* TODO: 一旦静的画像で代替 */}
             {isCompleted ? (
               <img
-                src={TokyoTowerColored}
-                alt="東京タワーのカラーアイコン"
+                src={challenge.stamp_color_image_url}
+                alt={`${challenge.stamp_name}のカラーアイコン`}
                 className="w-40 h-40 object-cover"
               />
             ) : (
               <img
-                src={TokyoTowerMonoclo}
-                alt="東京タワーのモノクロアイコン"
+                src={challenge.stamp_gray_image_url}
+                alt={`${challenge.stamp_name}のグレーアイコン`}
                 className="w-40 h-40 object-cover"
               />
             )}
           </div>
         </div>
+        <Spacer size="40px" />
+        <p className="text-center italic text-sm text-gray-400">
+          {challenge.flavor_text}
+        </p>
         <Spacer size="50px" />
         <ChallengeStatus
           isLoggedIn={user ? true : false}

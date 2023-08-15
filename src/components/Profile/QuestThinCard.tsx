@@ -16,8 +16,6 @@ const QuestThinCard: React.FC<QuestThinCardProps> = React.memo(({ quest }) => (
       <div className="text-sm text-gray-300 leading-tight">
         {quest.description}
       </div>
-      <Spacer size="3px" />
-      <div className="text-base font-medium">{quest.difficulty}</div>
     </div>
   </Link>
 ));

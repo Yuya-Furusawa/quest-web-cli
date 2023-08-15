@@ -18,18 +18,22 @@ const QuestPage: React.FC = () => {
 
   const { user } = React.useContext(AuthContext);
 
+  const { data: participatedQuests } = useSWR<string[], Error>(
+    `${import.meta.env.VITE_API_BASE_URL}/me/participated_quests`,
+    fetcher
+  );
   const [status, setStatus] = React.useState<ParticipateStatus>("LogOut");
   React.useEffect(() => {
-    if (!user) {
+    if (!participatedQuests) {
       setStatus("LogOut");
     } else {
       const status =
-        user.participate_quest.findIndex((quest) => quest.id === id) > -1
+        participatedQuests.findIndex((questId) => questId === id) > -1
           ? "Participate"
           : "NonParticipate";
       setStatus(status);
     }
-  }, [user, id]);
+  }, [user, id, participatedQuests]);
   const participateQuest = React.useCallback(() => {
     setStatus("Participate");
   }, []);

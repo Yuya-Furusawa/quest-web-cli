@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import * as React from "react";
 import { Meta, StoryObj } from "@storybook/react";
+import { withRouter } from "storybook-addon-react-router-v6";
 
 import ChallengeStatus from ".";
 
 const meta: Meta<typeof ChallengeStatus> = {
   title: "components/Challenge/ChallengeStatus",
   component: ChallengeStatus,
+  decorators: [withRouter],
 };
 export default meta;
 

@@ -33,8 +33,6 @@ export const Login: Story = {
       id: "",
       username: "Test User",
       email: "test@example.com",
-      password: "password",
-      participate_quest: [],
     };
 
     return (
