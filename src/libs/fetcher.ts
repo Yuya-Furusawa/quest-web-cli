@@ -1,5 +1,4 @@
-/* eslint-disable */
-export const fetcher = (url: string): Promise<any> =>
+export const fetcher = <T>(url: string): Promise<T> =>
   fetch(url, {
     credentials: "include",
   }).then((res) => res.json());
