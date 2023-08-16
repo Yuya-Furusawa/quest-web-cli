@@ -6,7 +6,7 @@ import type { Quest } from "../../libs/type";
 import QuestCard from "./QuestCard";
 
 const meta: Meta<typeof QuestCard> = {
-  title: "components/Home/QuestCard",
+  title: "components/HomePageView/QuestCard",
   component: QuestCard,
   decorators: [
     withRouter,

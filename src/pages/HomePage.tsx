@@ -3,14 +3,14 @@ import useSWR from "swr";
 
 import type { Quest, User } from "@libs/type";
 import { fetcher } from "@libs/fetcher";
-import QuestCard from "@components/Home/QuestCard";
-import Spacer from "@components/atoms/Spacer";
 import { AuthContext } from "@context/auth";
+import HomePageView from "@components/HomePageView";
 
 const HomePage: React.FC = () => {
-  const { data, error, isLoading } = useSWR<Quest[], Error>(
+  const { data: quests } = useSWR(
     `${import.meta.env.VITE_API_BASE_URL}/quests`,
-    fetcher
+    fetcher<Quest[]>,
+    { suspense: true }
   );
 
   const context = React.useContext(AuthContext);
@@ -26,31 +26,7 @@ const HomePage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  if (error)
-    return (
-      <div className="flex justify-center w-full">
-        <div className="w-2/5">Failed to load</div>
-      </div>
-    );
-
-  if (isLoading)
-    return (
-      <div className="flex justify-center w-full">
-        <div className="w-2/5">Loading...</div>
-      </div>
-    );
-
-  return (
-    <div className="flex flex-col justify-center items-center w-full">
-      <Spacer size="15px" />
-      <div className="flex justify-center flex-col gap-y-4 w-11/12 lg:w-2/5">
-        {data &&
-          data.map((quest: Quest) => (
-            <QuestCard key={quest.id} quest={quest} />
-          ))}
-      </div>
-    </div>
-  );
+  return <HomePageView quests={quests} />;
 };
 
 export default HomePage;
