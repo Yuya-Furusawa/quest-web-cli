@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import ChallengePageView from ".";
 
 const meta: Meta<typeof ChallengePageView> = {
-  title: "pages/ChallengePage",
+  title: "components/ChallengePageView",
   component: ChallengePageView,
 };
 export default meta;
@@ -21,8 +21,10 @@ export const Default: Story = {
       latitude: 35.6895,
       longitude: 139.6917,
       stamp_name: "Test Stamp",
-      stamp_color_image_url: "https://res.cloudinary.com/dbbtfr2i5/image/upload/v1692109657/tokyo-tower_color_bofufc.png",
-      stamp_gray_image_url: "https://res.cloudinary.com/dbbtfr2i5/image/upload/v1692109656/tokyo-tower_monoclo_jxf7fb.png",
+      stamp_color_image_url:
+        "https://res.cloudinary.com/dbbtfr2i5/image/upload/v1692109657/tokyo-tower_color_bofufc.png",
+      stamp_gray_image_url:
+        "https://res.cloudinary.com/dbbtfr2i5/image/upload/v1692109656/tokyo-tower_monoclo_jxf7fb.png",
       flavor_text: "test-text",
     };
     return (
@@ -36,6 +38,6 @@ export const Default: Story = {
         onClickCheckInButton={() => {}}
         remainingTime={3000}
       />
-    )
-  }
+    );
+  },
 };

@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import NotInValidAreaMessage from "./NotInValidAreaMessage";
 
 const meta: Meta<typeof NotInValidAreaMessage> = {
-  title: "components/Challenge/ChallengeStatus/NotInValidAreaMessage",
+  title: "components/ChallengePageView/ChallengeStatus/NotInValidAreaMessage",
   component: NotInValidAreaMessage,
 };
 export default meta;

@@ -5,7 +5,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import CheckInMessage from "./CheckInMessage";
 
 const meta: Meta<typeof CheckInMessage> = {
-  title: "components/Challenge/ChallengeStatus/CheckInMessage",
+  title: "components/ChallengePageView/ChallengeStatus/CheckInMessage",
   component: CheckInMessage,
 };
 export default meta;

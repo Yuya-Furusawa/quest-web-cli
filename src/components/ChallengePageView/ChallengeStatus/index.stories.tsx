@@ -6,7 +6,7 @@ import { withRouter } from "storybook-addon-react-router-v6";
 import ChallengeStatus from ".";
 
 const meta: Meta<typeof ChallengeStatus> = {
-  title: "components/Challenge/ChallengeStatus",
+  title: "components/ChallengePageView/ChallengeStatus",
   component: ChallengeStatus,
   decorators: [withRouter],
 };

@@ -5,7 +5,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import ChallengeProcessing from "./ChallengeProcessing";
 
 const meta: Meta<typeof ChallengeProcessing> = {
-  title: "components/Challenge/ChallengeStatus/ChallengeProcessing",
+  title: "components/ChallengePageView/ChallengeStatus/ChallengeProcessing",
   component: ChallengeProcessing,
 };
 export default meta;

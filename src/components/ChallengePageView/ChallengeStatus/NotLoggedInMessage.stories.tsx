@@ -5,7 +5,7 @@ import { withRouter } from "storybook-addon-react-router-v6";
 import NotLoggedInMessage from "./NotLoggedInMessage";
 
 const meta: Meta<typeof NotLoggedInMessage> = {
-  title: "components/Challenge/ChallengeStatus/NotLoggedInMessage",
+  title: "components/ChallengePageView/ChallengeStatus/NotLoggedInMessage",
   component: NotLoggedInMessage,
   decorators: [withRouter],
 };
