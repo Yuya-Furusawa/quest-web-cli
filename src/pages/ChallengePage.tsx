@@ -38,7 +38,7 @@ const ChallengePage: React.FC = () => {
     setIsCompleted(true);
   }, []);
 
-  const { isInValidArea, remainingTime } = useStayDetection(
+  const { isInValidArea, remainingTimeInMillis } = useStayDetection(
     targetPosition,
     user !== null && !isCompleted // ログインしていてかつ、チャレンジ未達成の場合のみ位置情報の計算を行う
   );
@@ -52,7 +52,7 @@ const ChallengePage: React.FC = () => {
       isInValidArea={isInValidArea}
       isCheckedIn={isCheckedIn}
       onClickCheckInButton={onClickCheckInButton}
-      remainingTime={remainingTime}
+      remainingTimeInMillis={remainingTimeInMillis}
     />
   );
 };

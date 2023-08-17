@@ -12,7 +12,7 @@ type Props = {
   isInValidArea: boolean;
   isCheckedIn: boolean;
   onClickCheckInButton: () => void;
-  remainingTime: number;
+  remainingTimeInMillis: number;
 };
 
 const ChallengePageView: React.FC<Props> = ({
@@ -23,7 +23,7 @@ const ChallengePageView: React.FC<Props> = ({
   isInValidArea,
   isCheckedIn,
   onClickCheckInButton,
-  remainingTime,
+  remainingTimeInMillis,
 }) => (
   <div className="flex flex-col justify-center items-center w-full">
     <div className="flex justify-center flex-col w-11/12 lg:w-2/5">
@@ -63,7 +63,7 @@ const ChallengePageView: React.FC<Props> = ({
         isCompleted={isCompleted}
         onComplete={onComplete}
         onClickCheckInButton={onClickCheckInButton}
-        remainingTime={remainingTime}
+        remainingTimeInMillis={remainingTimeInMillis}
       />
     </div>
   </div>

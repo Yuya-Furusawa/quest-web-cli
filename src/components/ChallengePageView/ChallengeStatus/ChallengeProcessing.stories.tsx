@@ -14,6 +14,6 @@ type Story = StoryObj<typeof ChallengeProcessing>;
 
 export const Default: Story = {
   render: () => (
-    <ChallengeProcessing onComplete={() => {}} remainingTime={180000} />
+    <ChallengeProcessing onComplete={() => {}} remainingTimeInMillis={180000} />
   ),
 };

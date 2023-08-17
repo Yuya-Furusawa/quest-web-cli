@@ -13,7 +13,7 @@ type Props = {
   isCompleted: boolean;
   onComplete: () => void;
   onClickCheckInButton: () => void;
-  remainingTime: number;
+  remainingTimeInMillis: number;
 };
 
 const ChallengeStatus: React.FC<Props> = React.memo(
@@ -24,7 +24,7 @@ const ChallengeStatus: React.FC<Props> = React.memo(
     isCompleted,
     onComplete,
     onClickCheckInButton,
-    remainingTime,
+    remainingTimeInMillis,
   }) => {
     // ログインしていない状態
     // ログインを促すメッセージを表示
@@ -48,7 +48,7 @@ const ChallengeStatus: React.FC<Props> = React.memo(
     return (
       <ChallengeProcessing
         onComplete={onComplete}
-        remainingTime={remainingTime}
+        remainingTimeInMillis={remainingTimeInMillis}
       />
     );
   }

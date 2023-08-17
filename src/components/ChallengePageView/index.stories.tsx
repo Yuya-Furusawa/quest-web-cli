@@ -36,7 +36,7 @@ export const Default: Story = {
         isInValidArea={false}
         isCheckedIn={false}
         onClickCheckInButton={() => {}}
-        remainingTime={3000}
+        remainingTimeInMillis={3000}
       />
     );
   },

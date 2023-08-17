@@ -23,7 +23,7 @@ export const NotLoggedIn: Story = {
       isCompleted={false}
       onComplete={() => {}}
       onClickCheckInButton={() => {}}
-      remainingTime={0}
+      remainingTimeInMillis={0}
     />
   ),
 };
@@ -37,7 +37,7 @@ export const Completed: Story = {
       isCompleted={true}
       onComplete={() => {}}
       onClickCheckInButton={() => {}}
-      remainingTime={0}
+      remainingTimeInMillis={0}
     />
   ),
 };
@@ -51,7 +51,7 @@ export const NotInValidArea: Story = {
       isCompleted={false}
       onComplete={() => {}}
       onClickCheckInButton={() => {}}
-      remainingTime={0}
+      remainingTimeInMillis={0}
     />
   ),
 };
@@ -65,7 +65,7 @@ export const NotCheckIn: Story = {
       isCompleted={false}
       onComplete={() => {}}
       onClickCheckInButton={() => {}}
-      remainingTime={0}
+      remainingTimeInMillis={0}
     />
   ),
 };
@@ -79,7 +79,7 @@ export const ChallengeProcessing: Story = {
       isCompleted={false}
       onComplete={() => {}}
       onClickCheckInButton={() => {}}
-      remainingTime={5000}
+      remainingTimeInMillis={5000}
     />
   ),
 };

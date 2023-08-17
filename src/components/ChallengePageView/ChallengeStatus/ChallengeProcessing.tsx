@@ -2,21 +2,21 @@ import * as React from "react";
 import { ReactComponent as LoadingIcon } from "@assets/loadingIcon.svg";
 
 type Props = {
-  remainingTime: number;
+  remainingTimeInMillis: number;
   onComplete: () => void;
 };
 
 const ChallengeProcessing: React.FC<Props> = React.memo(
-  ({ remainingTime, onComplete }) => {
-    const timeFormatted = Math.floor(remainingTime / 1000);
+  ({ remainingTimeInMillis, onComplete }) => {
+    const timeFormatted = Math.floor(remainingTimeInMillis / 1000);
     const seconds = String(timeFormatted % 60).padStart(2, "0");
     const minutes = String(Math.floor(timeFormatted / 60)).padStart(2, "0");
 
     React.useEffect(() => {
-      if (remainingTime <= 0) {
+      if (remainingTimeInMillis <= 0) {
         onComplete();
       }
-    }, [remainingTime, onComplete]);
+    }, [remainingTimeInMillis, onComplete]);
 
     return (
       <div className="flex justify-center cursor-pointer">

@@ -2,7 +2,7 @@ import * as React from "react";
 
 type StayDetectionResult = {
   isInValidArea: boolean;
-  remainingTime: number;
+  remainingTimeInMillis: number;
 };
 
 type Coordinates = {
@@ -13,13 +13,15 @@ type Coordinates = {
 const useStayDetection = (
   targetPosition: Coordinates,
   shouldCalculate: boolean,
-  timeThreshold = 30000, // 30秒間滞在したら「滞在した」と判定する
-  accuracyThreshold = 50 // 50メートル以内の範囲にいたら「滞在した」と判定する、対象地点が大きい場合はここを大きくする場合がありそう
+  timeThresholdInMillis = 30000, // 30秒間滞在したら「滞在した」と判定する
+  accuracyThresholdInMeter = 50 // 50メートル以内の範囲にいたら「滞在した」と判定する、対象地点が大きい場合はここを大きくする場合がありそう
 ): StayDetectionResult => {
   const [isInValidArea, setIsInValidArea] = React.useState(false);
   const watchIdRef = React.useRef<number | null>(null);
   const initialTimeStampRef = React.useRef<number | null>(null);
-  const [remainingTime, setRemainingTime] = React.useState(timeThreshold);
+  const [remainingTimeInMillis, setRemainingTimeInMillis] = React.useState(
+    timeThresholdInMillis
+  );
 
   // 位置情報の取得と計算を行う
   React.useEffect(() => {
@@ -30,7 +32,7 @@ const useStayDetection = (
         watchIdRef.current = null;
         setIsInValidArea(false);
         initialTimeStampRef.current = null;
-        setRemainingTime(timeThreshold);
+        setRemainingTimeInMillis(timeThresholdInMillis);
       }
       return;
     }
@@ -41,25 +43,25 @@ const useStayDetection = (
       if (initialTimeStampRef.current === null) {
         initialTimeStampRef.current = timestamp;
       } else {
-        const distance = calculateDistance(targetPosition, coords);
+        const distance = calculateDistanceInMeter(targetPosition, coords);
         const elapsedTime = timestamp - initialTimeStampRef.current;
 
         // 範囲内にいるときの処理
-        if (distance <= accuracyThreshold) {
+        if (distance <= accuracyThresholdInMeter) {
           setIsInValidArea(true);
-          if (elapsedTime >= timeThreshold) {
+          if (elapsedTime >= timeThresholdInMillis) {
             if (watchIdRef.current) {
               navigator.geolocation.clearWatch(watchIdRef.current);
               watchIdRef.current = null;
             }
           } else {
-            setRemainingTime(timeThreshold - elapsedTime);
+            setRemainingTimeInMillis(timeThresholdInMillis - elapsedTime);
           }
           // 範囲外にいるときの処理
         } else {
           setIsInValidArea(false);
           initialTimeStampRef.current = null;
-          setRemainingTime(timeThreshold);
+          setRemainingTimeInMillis(timeThresholdInMillis);
         }
       }
     };
@@ -88,7 +90,12 @@ const useStayDetection = (
         navigator.geolocation.clearWatch(watchIdRef.current);
       }
     };
-  }, [targetPosition, shouldCalculate, timeThreshold, accuracyThreshold]);
+  }, [
+    targetPosition,
+    shouldCalculate,
+    timeThresholdInMillis,
+    accuracyThresholdInMeter,
+  ]);
 
   // 残り時間のカウントダウンを行う
   React.useEffect(() => {
@@ -98,7 +105,7 @@ const useStayDetection = (
     // 有効範囲内にいるときにカウントダウンを行う
     if (isInValidArea) {
       intervalId = setInterval(() => {
-        setRemainingTime((prevTime) => {
+        setRemainingTimeInMillis((prevTime) => {
           const newTime = prevTime - 1000; // 1秒ずつ減らす
           return newTime;
         });
@@ -114,12 +121,12 @@ const useStayDetection = (
 
   return {
     isInValidArea,
-    remainingTime,
+    remainingTimeInMillis,
   };
 };
 
 // 2点間の距離を計算する（メートル単位）
-const calculateDistance = (
+const calculateDistanceInMeter = (
   coords1: Coordinates, // 対象地点の緯度経度
   coords2: GeolocationCoordinates // 現地点の緯度経度（GeolocationAPIから取得）
 ) => {
