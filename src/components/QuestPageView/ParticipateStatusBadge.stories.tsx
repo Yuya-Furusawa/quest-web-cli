@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import ParticipateStatusBadge from "./ParticipateStatusBadge";
 
 const meta: Meta<typeof ParticipateStatusBadge> = {
-  title: "components/HomePageView/ParticipateStatusBadge",
+  title: "components/QuestPageView/ParticipateStatusBadge",
   component: ParticipateStatusBadge,
 };
 export default meta;

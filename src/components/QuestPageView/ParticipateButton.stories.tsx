@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import ParicipateButton from "./ParticipateButton";
 
 const meta: Meta<typeof ParicipateButton> = {
-  title: "components/Quest/ParticipateButton",
+  title: "components/QuestPageView/ParticipateButton",
   component: ParicipateButton,
 };
 export default meta;

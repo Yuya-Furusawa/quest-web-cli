@@ -6,7 +6,7 @@ import type { Challenge } from "../../libs/type";
 import ChallengeCard from "./ChallengeCard";
 
 const meta: Meta<typeof ChallengeCard> = {
-  title: "components/Quest/ChallengeCard",
+  title: "components/QuestPageView/ChallengeCard",
   component: ChallengeCard,
   decorators: [
     withRouter,

@@ -6,7 +6,7 @@ import type { Quest } from "../../libs/type";
 import QuestThinCard from "./QuestThinCard";
 
 const meta: Meta<typeof QuestThinCard> = {
-  title: "components/Profile/QuestThinCard",
+  title: "components/ProfilePageView/QuestThinCard",
   component: QuestThinCard,
   decorators: [
     withRouter,
