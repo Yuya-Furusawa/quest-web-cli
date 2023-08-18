@@ -1,11 +1,13 @@
 import * as React from "react";
 import { Meta, StoryObj } from "@storybook/react";
+import { withRouter } from "storybook-addon-react-router-v6";
 
 import QuestPageView from ".";
 
 const meta: Meta<typeof QuestPageView> = {
   title: "components/QuestPageView",
   component: QuestPageView,
+  decorators: [withRouter],
 };
 export default meta;
 

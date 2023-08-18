@@ -1,11 +1,13 @@
 import * as React from "react";
 import { Meta, StoryObj } from "@storybook/react";
+import { withRouter } from "storybook-addon-react-router-v6";
 
 import HomePageView from ".";
 
 const meta: Meta<typeof HomePageView> = {
   title: "components/HomePageView",
   component: HomePageView,
+  decorators: [withRouter],
 };
 export default meta;
 
