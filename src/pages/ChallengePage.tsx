@@ -15,6 +15,11 @@ const ChallengePage: React.FC = () => {
     fetcher<Challenge>,
     { suspense: true }
   );
+  const { data: completedChallengeIds } = useSWR(
+    `${import.meta.env.VITE_API_BASE_URL}/me/completed_challenges`,
+    fetcher<string[]>,
+    { suspense: true }
+  );
 
   const { user } = React.useContext(AuthContext);
 
@@ -32,8 +37,11 @@ const ChallengePage: React.FC = () => {
     setIsCheckedIn(true);
   }, []);
 
-  // TODO: そのチャレンジを達成しているか否かを判定する
   const [isCompleted, setIsCompleted] = React.useState(false);
+  React.useEffect(() => {
+    setIsCompleted(() => (id ? completedChallengeIds.includes(id) : false));
+  }, [id, completedChallengeIds]);
+
   const onComplete = React.useCallback(() => {
     setIsCompleted(true);
   }, []);
