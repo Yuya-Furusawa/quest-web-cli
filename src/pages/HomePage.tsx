@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
   const context = React.useContext(AuthContext);
   const { data: user } = useSWR<User, Error>(
     `${import.meta.env.VITE_API_BASE_URL}/user/auth`,
-    fetcher
+    fetcher<User>
   );
 
   React.useEffect(() => {

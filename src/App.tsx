@@ -16,16 +16,16 @@ function App() {
   return (
     <AuthContextProvider>
       <Header />
-      <Routes>
-        <React.Suspense fallback={<Loading />}>
+      <React.Suspense fallback={<Loading />}>
+        <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/quest/:id" element={<QuestPage />} />
           <Route path="/challenge/:id" element={<ChallengePage />} />
           <Route path="/profile" element={<ProfilePage />} />
-        </React.Suspense>
-      </Routes>
+        </Routes>
+      </React.Suspense>
     </AuthContextProvider>
   );
 }
