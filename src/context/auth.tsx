@@ -1,6 +1,8 @@
 import * as React from "react";
+import useSWR from "swr";
 
 import type { User } from "@libs/type";
+import { fetcher } from "@libs/fetcher";
 
 type AuthContextType = {
   user: User | null;
@@ -49,6 +51,11 @@ type AuthContextProviderProps = {
 export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   children,
 }) => {
+  const { data: user } = useSWR<User, Error>(
+    `${import.meta.env.VITE_API_BASE_URL}/user/auth`,
+    fetcher
+  );
+
   const [state, dispatch] = React.useReducer(authReducer, initialState);
 
   function login(userData: User) {
@@ -58,6 +65,13 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   function logout() {
     dispatch({ type: "LOGOUT", payload: null });
   }
+
+  React.useEffect(() => {
+    console.log(user);
+    if (user) {
+      dispatch({ type: "LOGIN", payload: user });
+    }
+  }, [user]);
 
   return (
     <AuthContext.Provider value={{ user: state.user, login, logout }}>
