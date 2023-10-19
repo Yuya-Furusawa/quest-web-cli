@@ -7,6 +7,7 @@ import { fetcher } from "@libs/fetcher";
 import useStayDetection from "@libs/useStayDetection";
 import Spacer from "@components/atoms/Spacer";
 import { AuthContext } from "@context/auth";
+import { ActivityContext } from "@context/activity";
 import ChallengeStatus from "@components/Challenge/ChallengeStatus";
 
 const ChallengePage: React.FC = () => {
@@ -17,6 +18,7 @@ const ChallengePage: React.FC = () => {
   );
 
   const { user } = React.useContext(AuthContext);
+  const { completedChallenges } = React.useContext(ActivityContext);
 
   // 対象地点の座標
   const targetPosition = React.useMemo(
@@ -32,11 +34,15 @@ const ChallengePage: React.FC = () => {
     setIsCheckedIn(true);
   }, []);
 
-  // TODO: そのチャレンジを達成しているか否かを判定する
   const [isCompleted, setIsCompleted] = React.useState(false);
   const onComplete = React.useCallback(() => {
     setIsCompleted(true);
   }, []);
+  React.useEffect(() => {
+    if (id && completedChallenges.includes(id)) {
+      setIsCompleted(true);
+    }
+  }, [completedChallenges, id]);
 
   const { isInValidArea, remainingTime } = useStayDetection(
     targetPosition,

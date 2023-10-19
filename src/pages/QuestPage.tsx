@@ -8,6 +8,7 @@ import { AuthContext } from "@context/auth";
 import Spacer from "@components/atoms/Spacer";
 import ChallengeCard from "@components/Quest/ChallengeCard";
 import ParticipateButton from "@components/Quest/ParticipateButton";
+import { ActivityContext } from "@context/activity";
 
 const QuestPage: React.FC = () => {
   const { id } = useParams();
@@ -17,11 +18,9 @@ const QuestPage: React.FC = () => {
   );
 
   const { user } = React.useContext(AuthContext);
+  const { participatedQuests, completedChallenges } =
+    React.useContext(ActivityContext);
 
-  const { data: participatedQuests } = useSWR<string[], Error>(
-    `${import.meta.env.VITE_API_BASE_URL}/me/participated_quests`,
-    fetcher
-  );
   const [status, setStatus] = React.useState<ParticipateStatus>("LogOut");
   React.useEffect(() => {
     if (!participatedQuests) {
@@ -68,7 +67,7 @@ const QuestPage: React.FC = () => {
             <ChallengeCard
               key={challenge.id}
               challenge={challenge}
-              isCompleted={challenge.id[0].toUpperCase() <= "M"} // TODO: サーバーから返される完了ステータスに置き換える
+              isCompleted={completedChallenges.includes(challenge.id)}
             />
           ))}
         </div>
