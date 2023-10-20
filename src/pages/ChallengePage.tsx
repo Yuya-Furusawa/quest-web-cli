@@ -18,7 +18,7 @@ const ChallengePage: React.FC = () => {
   );
 
   const { user } = React.useContext(AuthContext);
-  const { completedChallenges } = React.useContext(ActivityContext);
+  const { completedChallenges, complete } = React.useContext(ActivityContext);
 
   // 対象地点の座標
   const targetPosition = React.useMemo(
@@ -34,10 +34,35 @@ const ChallengePage: React.FC = () => {
     setIsCheckedIn(true);
   }, []);
 
+  const postChallengeCompletion = async (id: string, userId: string) => {
+    try {
+      const url = `${
+        import.meta.env.VITE_API_BASE_URL
+      }/challenges/${id}/complete`;
+      const data = {
+        user_id: userId,
+      };
+      await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const [isCompleted, setIsCompleted] = React.useState(false);
   const onComplete = React.useCallback(() => {
     setIsCompleted(true);
-  }, []);
+    if (id && user) {
+      postChallengeCompletion(id, user.id);
+      complete(id);
+    }
+  }, [id, user, complete]);
   React.useEffect(() => {
     if (id && completedChallenges.includes(id)) {
       setIsCompleted(true);
