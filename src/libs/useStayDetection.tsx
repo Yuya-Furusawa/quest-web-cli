@@ -13,7 +13,7 @@ type Coordinates = {
 const useStayDetection = (
   targetPosition: Coordinates,
   shouldCalculate: boolean,
-  timeThreshold = 30000, // 30秒間滞在したら「滞在した」と判定する
+  timeThreshold = 10000, // 10秒間滞在したら「滞在した」と判定する
   accuracyThreshold = 50 // 50メートル以内の範囲にいたら「滞在した」と判定する、対象地点が大きい場合はここを大きくする場合がありそう
 ): StayDetectionResult => {
   const [isInValidArea, setIsInValidArea] = React.useState(false);
