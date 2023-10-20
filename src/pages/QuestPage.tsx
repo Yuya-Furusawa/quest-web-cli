@@ -18,7 +18,7 @@ const QuestPage: React.FC = () => {
   );
 
   const { user } = React.useContext(AuthContext);
-  const { participatedQuests, completedChallenges } =
+  const { participatedQuests, participate, completedChallenges } =
     React.useContext(ActivityContext);
 
   const [status, setStatus] = React.useState<ParticipateStatus>("LogOut");
@@ -33,9 +33,35 @@ const QuestPage: React.FC = () => {
       setStatus(status);
     }
   }, [user, id, participatedQuests]);
+
+  const postQuestParticipation = async (id: string, userId: string) => {
+    try {
+      const url = `${
+        import.meta.env.VITE_API_BASE_URL
+      }/quests/${id}/participate`;
+      const data = {
+        user_id: userId,
+      };
+      fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const participateQuest = React.useCallback(() => {
     setStatus("Participate");
-  }, []);
+    if (id && user) {
+      postQuestParticipation(id, user.id);
+      participate(id);
+    }
+  }, [id, user, participate]);
 
   if (!quest)
     return (
