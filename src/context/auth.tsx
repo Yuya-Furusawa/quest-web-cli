@@ -53,7 +53,10 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 }) => {
   const { data: user } = useSWR<User, Error>(
     `${import.meta.env.VITE_API_BASE_URL}/user/auth`,
-    fetcher
+    fetcher,
+    {
+      shouldRetryOnError: false,
+    }
   );
 
   const [state, dispatch] = React.useReducer(authReducer, initialState);
@@ -67,7 +70,6 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   }
 
   React.useEffect(() => {
-    console.log(user);
     if (user) {
       dispatch({ type: "LOGIN", payload: user });
     }

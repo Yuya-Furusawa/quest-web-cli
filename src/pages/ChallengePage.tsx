@@ -7,6 +7,7 @@ import { fetcher } from "@libs/fetcher";
 import useStayDetection from "@libs/useStayDetection";
 import Spacer from "@components/atoms/Spacer";
 import { AuthContext } from "@context/auth";
+import { ActivityContext } from "@context/activity";
 import ChallengeStatus from "@components/Challenge/ChallengeStatus";
 
 const ChallengePage: React.FC = () => {
@@ -17,6 +18,7 @@ const ChallengePage: React.FC = () => {
   );
 
   const { user } = React.useContext(AuthContext);
+  const { completedChallenges, complete } = React.useContext(ActivityContext);
 
   // 対象地点の座標
   const targetPosition = React.useMemo(
@@ -32,11 +34,40 @@ const ChallengePage: React.FC = () => {
     setIsCheckedIn(true);
   }, []);
 
-  // TODO: そのチャレンジを達成しているか否かを判定する
+  const postChallengeCompletion = async (id: string, userId: string) => {
+    try {
+      const url = `${
+        import.meta.env.VITE_API_BASE_URL
+      }/challenges/${id}/complete`;
+      const data = {
+        user_id: userId,
+      };
+      await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const [isCompleted, setIsCompleted] = React.useState(false);
   const onComplete = React.useCallback(() => {
     setIsCompleted(true);
-  }, []);
+    if (id && user) {
+      postChallengeCompletion(id, user.id);
+      complete(id);
+    }
+  }, [id, user, complete]);
+  React.useEffect(() => {
+    if (id && completedChallenges.includes(id)) {
+      setIsCompleted(true);
+    }
+  }, [completedChallenges, id]);
 
   const { isInValidArea, remainingTime } = useStayDetection(
     targetPosition,
@@ -78,9 +109,11 @@ const ChallengePage: React.FC = () => {
           </div>
         </div>
         <Spacer size="40px" />
-        <p className="text-center italic text-sm text-gray-400">
-          {challenge.flavor_text}
-        </p>
+        {isCompleted && (
+          <p className="text-center italic text-sm text-gray-400">
+            {challenge.flavor_text}
+          </p>
+        )}
         <Spacer size="50px" />
         <ChallengeStatus
           isLoggedIn={user ? true : false}

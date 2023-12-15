@@ -8,6 +8,7 @@ import { AuthContext } from "@context/auth";
 import Spacer from "@components/atoms/Spacer";
 import ChallengeCard from "@components/Quest/ChallengeCard";
 import ParticipateButton from "@components/Quest/ParticipateButton";
+import { ActivityContext } from "@context/activity";
 
 const QuestPage: React.FC = () => {
   const { id } = useParams();
@@ -17,11 +18,9 @@ const QuestPage: React.FC = () => {
   );
 
   const { user } = React.useContext(AuthContext);
+  const { participatedQuests, participate, completedChallenges } =
+    React.useContext(ActivityContext);
 
-  const { data: participatedQuests } = useSWR<string[], Error>(
-    `${import.meta.env.VITE_API_BASE_URL}/me/participated_quests`,
-    fetcher
-  );
   const [status, setStatus] = React.useState<ParticipateStatus>("LogOut");
   React.useEffect(() => {
     if (!participatedQuests) {
@@ -34,9 +33,35 @@ const QuestPage: React.FC = () => {
       setStatus(status);
     }
   }, [user, id, participatedQuests]);
+
+  const postQuestParticipation = async (id: string, userId: string) => {
+    try {
+      const url = `${
+        import.meta.env.VITE_API_BASE_URL
+      }/quests/${id}/participate`;
+      const data = {
+        user_id: userId,
+      };
+      fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const participateQuest = React.useCallback(() => {
     setStatus("Participate");
-  }, []);
+    if (id && user) {
+      postQuestParticipation(id, user.id);
+      participate(id);
+    }
+  }, [id, user, participate]);
 
   if (!quest)
     return (
@@ -68,7 +93,7 @@ const QuestPage: React.FC = () => {
             <ChallengeCard
               key={challenge.id}
               challenge={challenge}
-              isCompleted={challenge.id[0].toUpperCase() <= "M"} // TODO: サーバーから返される完了ステータスに置き換える
+              isCompleted={completedChallenges.includes(challenge.id)}
             />
           ))}
         </div>
