@@ -73,7 +73,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     if (user) {
       dispatch({ type: "LOGIN", payload: user });
     }
-  }, [user]);
+  });
 
   return (
     <AuthContext.Provider value={{ user: state.user, login, logout }}>
