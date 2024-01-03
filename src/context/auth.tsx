@@ -37,7 +37,7 @@ const authReducer: React.Reducer<AuthContextType, Action> = (state, action) => {
     case "LOGOUT":
       return {
         ...state,
-        user: action.payload,
+        user: null,
       };
     default:
       return state;
@@ -70,10 +70,10 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   }
 
   React.useEffect(() => {
-    if (user) {
+    if (user && user !== state.user) {
       dispatch({ type: "LOGIN", payload: user });
     }
-  });
+  }, [user, state.user]);
 
   return (
     <AuthContext.Provider value={{ user: state.user, login, logout }}>
