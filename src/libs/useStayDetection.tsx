@@ -13,6 +13,7 @@ type Coordinates = {
 const useStayDetection = (
   targetPosition: Coordinates,
   shouldCalculate: boolean,
+  isClickedCheckIn: boolean,
   timeThreshold = 10000, // 10秒間滞在したら「滞在した」と判定する
   accuracyThreshold = 50 // 50メートル以内の範囲にいたら「滞在した」と判定する、対象地点が大きい場合はここを大きくする場合がありそう
 ): StayDetectionResult => {
@@ -52,8 +53,6 @@ const useStayDetection = (
               navigator.geolocation.clearWatch(watchIdRef.current);
               watchIdRef.current = null;
             }
-          } else {
-            setRemainingTime(timeThreshold - elapsedTime);
           }
           // 範囲外にいるときの処理
         } else {
@@ -95,8 +94,12 @@ const useStayDetection = (
     // Node.jsのタイマーモジュールを用いる
     let intervalId: NodeJS.Timeout | null = null;
 
-    // 有効範囲内にいるときにカウントダウンを行う
-    if (isInValidArea) {
+    // カウントダウンを行うのは以下の条件をすべて満たすとき
+    // 1: ユーザーが有効範囲内にいる（isInValidArea = true）
+    // 2: ユーザーがログインしている（shouldCalculate = true）
+    // 3: ユーザーがまだこのチャンレンジを達成していない（shouldCalculate = true）
+    // 4: ユーザーがチェックインボタンを押したとき（isClickedCheckIn = true）
+    if (isInValidArea && isClickedCheckIn && shouldCalculate) {
       intervalId = setInterval(() => {
         setRemainingTime((prevTime) => {
           const newTime = prevTime - 1000; // 1秒ずつ減らす
@@ -110,7 +113,7 @@ const useStayDetection = (
         clearInterval(intervalId);
       }
     };
-  }, [isInValidArea]);
+  }, [isInValidArea, isClickedCheckIn, shouldCalculate]);
 
   return {
     isInValidArea,

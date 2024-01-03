@@ -71,7 +71,8 @@ const ChallengePage: React.FC = () => {
 
   const { isInValidArea, remainingTime } = useStayDetection(
     targetPosition,
-    user !== null && !isCompleted // ログインしていてかつ、チャレンジ未達成の場合のみ位置情報の計算を行う
+    user !== null && !isCompleted, // ログインしていてかつ、チャレンジ未達成の場合のみ位置情報の計算を行う
+    isCheckedIn
   );
 
   if (!challenge)
